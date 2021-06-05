@@ -1,4 +1,4 @@
-package terrence.concurrent;
+package handbook.sdk.concurrent;
 
 import java.util.concurrent.locks.ReentrantLock;
 

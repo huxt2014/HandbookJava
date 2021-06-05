@@ -7,4 +7,11 @@
  * in the user guide at https://docs.gradle.org/4.8.1/userguide/multi_project_builds.html
  */
 
+include "hb-sdk"
+include "hb-statemachine"
+
 rootProject.name = 'HandbookJava'
+
+rootProject.children.each {project ->
+    project.buildFileName = "${project.name}.gradle"
+}
