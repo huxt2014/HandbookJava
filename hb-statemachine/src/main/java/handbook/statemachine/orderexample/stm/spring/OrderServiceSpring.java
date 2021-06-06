@@ -1,14 +1,13 @@
-package handbook.statemachine.orderexample.service;
+package handbook.statemachine.orderexample.stm.spring;
 
 import handbook.statemachine.orderexample.factory.OrderFactory;
 import handbook.statemachine.orderexample.model.OrderProcessRecord;
 import handbook.statemachine.orderexample.model.OrderProcessRecordStatus;
 import handbook.statemachine.orderexample.repository.OrderProcessRecordRepository;
-import handbook.statemachine.orderexample.stm.OrderEvent;
-import handbook.statemachine.orderexample.stm.StmBuilder;
-import handbook.statemachine.orderexample.stm.guard.PaidGuard;
-import handbook.statemachine.orderexample.stm.message.PaidMessage;
-import lombok.Getter;
+import handbook.statemachine.orderexample.stm.common.OrderEvent;
+import handbook.statemachine.orderexample.stm.common.guard.PaidGuard;
+import handbook.statemachine.orderexample.stm.common.message.PaidMessage;
+import handbook.statemachine.dto.PayInfoDTO;
 import org.bson.types.ObjectId;
 import org.springframework.statemachine.StateMachine;
 import org.springframework.statemachine.persist.StateMachinePersister;
@@ -17,21 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 @Service
-public class OrderService {
-
-    public static class PayInfoDTO{
-
-        @Getter
-        private String orderPayId;
-
-        @Getter
-        private String paymentPayId;
-
-        PayInfoDTO(String orderPayId){
-            this.orderPayId = orderPayId;
-            this.paymentPayId = "pay_" + new ObjectId();
-        }
-    }
+public class OrderServiceSpring {
 
     @Resource
     private OrderFactory orderFactory;

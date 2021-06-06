@@ -1,10 +1,12 @@
-package handbook.statemachine.orderexample.stm.guard;
+package handbook.statemachine.orderexample.stm.common.guard;
 
+import com.alibaba.cola.statemachine.Condition;
 import handbook.statemachine.orderexample.model.OrderProcessRecord;
 import handbook.statemachine.orderexample.model.OrderProcessRecordStatus;
-import handbook.statemachine.orderexample.service.OrderService;
-import handbook.statemachine.orderexample.stm.OrderEvent;
-import handbook.statemachine.orderexample.stm.message.PaidMessage;
+import handbook.statemachine.orderexample.stm.common.OrderEvent;
+import handbook.statemachine.orderexample.stm.common.message.PaidMessage;
+import handbook.statemachine.dto.PayInfoDTO;
+import org.springframework.messaging.Message;
 import org.springframework.statemachine.StateContext;
 import org.springframework.statemachine.guard.Guard;
 
@@ -23,7 +25,7 @@ public class PaidGuard {
         SamePaid
     }
 
-    public static Choice evaluateChoice(OrderProcessRecord orderProcessRecord, OrderService.PayInfoDTO payInfoDTO){
+    public static Choice evaluateChoice(OrderProcessRecord orderProcessRecord, PayInfoDTO payInfoDTO){
         List<OrderProcessRecord.PaymentInfo> paymentInfos = orderProcessRecord.getPaymentInfos();
 
         OrderProcessRecord.PaymentInfo paymentInfo = orderProcessRecord.getPaymentInfos().stream()
@@ -46,35 +48,61 @@ public class PaidGuard {
         }
     }
 
-    public static class PartialPaid implements Guard<OrderProcessRecordStatus, OrderEvent>{
+    public static class PartialPaid
+            implements Guard<OrderProcessRecordStatus, OrderEvent>, Condition<Message<OrderEvent>> {
 
+        // for spring
         @Override
         public boolean evaluate(StateContext<OrderProcessRecordStatus, OrderEvent> context) {
             return context.getMessage().getHeaders().get(PaidMessage.KEY_CHOICE) == Choice.PartialPaid;
         }
+
+        // for cola
+        @Override
+        public boolean isSatisfied(Message<OrderEvent> context) {
+            return context.getHeaders().get(PaidMessage.KEY_CHOICE) == Choice.PartialPaid;
+        }
     }
 
-    public static class UnknownPaid implements Guard<OrderProcessRecordStatus, OrderEvent>{
+    public static class UnknownPaid
+            implements Guard<OrderProcessRecordStatus, OrderEvent>, Condition<Message<OrderEvent>>{
 
         @Override
         public boolean evaluate(StateContext<OrderProcessRecordStatus, OrderEvent> context) {
             return context.getMessage().getHeaders().get(PaidMessage.KEY_CHOICE) == Choice.UnknownPaid;
         }
+
+        @Override
+        public boolean isSatisfied(Message<OrderEvent> context) {
+            return context.getHeaders().get(PaidMessage.KEY_CHOICE) == Choice.UnknownPaid;
+        }
     }
 
-    public static class SamePaid implements Guard<OrderProcessRecordStatus, OrderEvent>{
+    public static class SamePaid
+            implements Guard<OrderProcessRecordStatus, OrderEvent>, Condition<Message<OrderEvent>>{
 
         @Override
         public boolean evaluate(StateContext<OrderProcessRecordStatus, OrderEvent> context) {
             return context.getMessage().getHeaders().get(PaidMessage.KEY_CHOICE) == Choice.SamePaid;
         }
+
+        @Override
+        public boolean isSatisfied(Message<OrderEvent> context) {
+            return context.getHeaders().get(PaidMessage.KEY_CHOICE) == Choice.SamePaid;
+        }
     }
 
-    public static class AllPaid implements Guard<OrderProcessRecordStatus, OrderEvent>{
+    public static class AllPaid implements
+            Guard<OrderProcessRecordStatus, OrderEvent>, Condition<Message<OrderEvent>>{
 
         @Override
         public boolean evaluate(StateContext<OrderProcessRecordStatus, OrderEvent> context) {
             return context.getMessage().getHeaders().get(PaidMessage.KEY_CHOICE) == Choice.AllPaid;
+        }
+
+        @Override
+        public boolean isSatisfied(Message<OrderEvent> context) {
+            return context.getHeaders().get(PaidMessage.KEY_CHOICE) == Choice.AllPaid;
         }
     }
 }

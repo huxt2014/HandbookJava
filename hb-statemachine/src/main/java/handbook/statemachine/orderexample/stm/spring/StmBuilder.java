@@ -1,10 +1,11 @@
-package handbook.statemachine.orderexample.stm;
+package handbook.statemachine.orderexample.stm.spring;
 
 import handbook.statemachine.orderexample.model.OrderProcessRecordStatus;
-import handbook.statemachine.orderexample.stm.action.EnterStateCommonAction;
-import handbook.statemachine.orderexample.stm.action.PaidAction;
-import handbook.statemachine.orderexample.stm.action.UnknownPaidAction;
-import handbook.statemachine.orderexample.stm.guard.PaidGuard;
+import handbook.statemachine.orderexample.stm.common.OrderEvent;
+import handbook.statemachine.orderexample.stm.common.action.EnterStateCommonAction;
+import handbook.statemachine.orderexample.stm.common.action.PaidAction;
+import handbook.statemachine.orderexample.stm.common.action.UnknownPaidAction;
+import handbook.statemachine.orderexample.stm.common.guard.PaidGuard;
 import org.springframework.statemachine.StateMachine;
 import org.springframework.statemachine.config.StateMachineBuilder;
 import org.springframework.statemachine.config.configurers.StateConfigurer;
@@ -23,7 +24,12 @@ public class StmBuilder {
                 .choice(OrderProcessRecordStatus.PAID_CHECK);
         EnumSet.allOf(OrderProcessRecordStatus.class).forEach(
                 status -> {
-                    stateConfigurer.stateEntry(status, new EnterStateCommonAction());
+                    if (status == OrderProcessRecordStatus.INIT ){
+                    } else if (status == OrderProcessRecordStatus.PAY_READY){
+                        stateConfigurer.state(status);
+                    } else {
+                        stateConfigurer.stateEntry(status, new EnterStateCommonAction());
+                    }
                 }
         );
 

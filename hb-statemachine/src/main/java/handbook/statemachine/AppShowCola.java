@@ -1,22 +1,26 @@
 package handbook.statemachine;
 
-import handbook.statemachine.orderexample.service.OrderService;
+import handbook.statemachine.orderexample.stm.cola.OrderServiceCola;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
+/**
+ * 基本不可用用于生产环境，仅仅提供了一个stateless的实现思路。
+ * 接口设计不错
+ */
 @SpringBootApplication
 @ComponentScan(basePackages = {"handbook.statemachine.orderexample",
                                "handbook.statemachine.config" })
-public class App {
+public class AppShowCola {
     public static void main(String[] args) throws Exception {
-        SpringApplication app = new SpringApplication(App.class);
+        SpringApplication app = new SpringApplication(AppShowCola.class);
         app.setWebApplicationType(WebApplicationType.NONE);
         ApplicationContext context = app.run(args);
 
-        OrderService service = context.getBean(OrderService.class);
+        OrderServiceCola service = context.getBean(OrderServiceCola.class);
         service.processTest();
     }
 

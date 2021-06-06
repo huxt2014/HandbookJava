@@ -1,4 +1,4 @@
-package handbook.statemachine.orderexample.stm;
+package handbook.statemachine.orderexample.stm.common;
 
 public enum OrderEvent {
 

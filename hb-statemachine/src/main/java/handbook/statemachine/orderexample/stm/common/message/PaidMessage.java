@@ -1,9 +1,9 @@
-package handbook.statemachine.orderexample.stm.message;
+package handbook.statemachine.orderexample.stm.common.message;
 
 import handbook.statemachine.orderexample.model.OrderProcessRecord;
-import handbook.statemachine.orderexample.service.OrderService;
-import handbook.statemachine.orderexample.stm.OrderEvent;
-import handbook.statemachine.orderexample.stm.guard.PaidGuard;
+import handbook.statemachine.orderexample.stm.common.OrderEvent;
+import handbook.statemachine.orderexample.stm.common.guard.PaidGuard;
+import handbook.statemachine.dto.PayInfoDTO;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
 
@@ -31,7 +31,7 @@ public class PaidMessage implements Message<OrderEvent> {
         return headers;
     }
 
-    public PaidMessage(OrderProcessRecord orderProcessRecord, OrderService.PayInfoDTO payInfoDTO, PaidGuard.Choice choice){
+    public PaidMessage(OrderProcessRecord orderProcessRecord, PayInfoDTO payInfoDTO, PaidGuard.Choice choice){
         Map<String, Object> tmp = new HashMap<>();
         tmp.put(KEY_PAY_DTO, payInfoDTO);
         tmp.put(KEY_ORDER, orderProcessRecord);

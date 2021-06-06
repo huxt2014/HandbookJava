@@ -1,7 +1,8 @@
-package handbook.statemachine.orderexample.stm;
+package handbook.statemachine.orderexample.stm.spring;
 
 import handbook.statemachine.orderexample.model.OrderProcessRecord;
 import handbook.statemachine.orderexample.model.OrderProcessRecordStatus;
+import handbook.statemachine.orderexample.stm.common.OrderEvent;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.statemachine.StateMachineContext;
