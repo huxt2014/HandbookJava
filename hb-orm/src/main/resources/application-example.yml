@@ -1,0 +1,16 @@
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: "jdbc:mysql://localhost:1111/db?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai"
+    username: name
+    password: pw
+    hikari:
+      # 连接池配置
+      maximumPoolSize: 20
+      maxLifetime: 500000
+      connectionTimeout: 10000
+  jpa:
+    properties:
+      hibernate:
+        dialect: "org.hibernate.dialect.MySQL8Dialect"

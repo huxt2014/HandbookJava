@@ -8,8 +8,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
- * 基本不可用用于生产环境，仅仅提供了一个stateless的实现思路。
- * 接口设计不错
+ * cola基本不可用用于生产环境，仅仅提供了一个stateless的实现思路，接口设计不错。
+ * spring stm功能比较全面，可以作为实践的参照。
  */
 @SpringBootApplication
 @ComponentScan(basePackages = {"handbook.statemachine.orderexample",
