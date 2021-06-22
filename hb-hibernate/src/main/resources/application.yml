@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active: sit
+  jackson:
+    time-zone: GMT+8
+  shell:
+     interactive:
+       enabled: false
+

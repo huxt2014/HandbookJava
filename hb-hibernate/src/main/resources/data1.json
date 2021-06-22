@@ -1,0 +1,49 @@
+{
+  "dataSources": [
+    {
+      "name": "test1",
+      "dataSourceType": "NORMAL"
+    },
+    {
+      "name": "test2",
+      "dataSourceType": "NORMAL"
+    },
+    {
+      "name": "test3",
+      "dataSourceType": "BAICHUAN"
+    }
+  ],
+  "taskConfigs": [
+    {
+      "name": "task1",
+      "taskStatus": "DISABLED",
+      "ruleConfigs": [
+        {
+          "name": "rule1",
+          "code": "return 1"
+        },
+        {
+          "name": "rule2",
+          "code": "return 2"
+        }
+      ]
+    },
+    {
+      "name": "task2",
+      "taskStatus": "DISABLED",
+      "ruleConfigs": [
+        {
+          "name": "rule3",
+          "code": "return 3"
+        },
+        {
+          "name": "rule4",
+          "code": "return 4"
+        }
+      ]
+    }
+  ]
+
+
+
+}

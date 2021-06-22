@@ -9,7 +9,7 @@
 
 include "hb-sdk"
 include "hb-statemachine"
-include "hb-orm"
+include "hb-hibernate"
 
 rootProject.name = 'HandbookJava'
 
